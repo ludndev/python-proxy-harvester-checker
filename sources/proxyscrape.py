@@ -1,5 +1,5 @@
 import requests
-from interface_source import SourceInterface
+from sources.interface_source import SourceInterface
 
 
 class ProxyScrapeSource(SourceInterface):
