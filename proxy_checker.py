@@ -70,7 +70,7 @@ class ProxyChecker:
 
     def harvest_proxy_list(self, source=None):
         """
-        Harvest proxies from the specified source(s).
+        Harvest proxies from the specified source(s) or from default sources
 
         Args:
             source (list or SourceInterface, optional): The source(s) from which to harvest proxies.
