@@ -35,3 +35,9 @@ class ProxyChecker:
                 proxy_dict['https'] = f'socks5://{raw_dict[2]}'
 
         return proxy_dict
+
+    def get_proxy_list(self):
+        with open(self.file_name, 'r+') as f:
+            proxy_list = [line.strip() for line in f]
+            f.close()
+            return proxy_list
