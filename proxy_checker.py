@@ -2,6 +2,7 @@ import os
 import random
 import requests
 from pathlib import Path
+from sources.interface_source import SourceInterface
 
 
 class ProxyChecker:
@@ -20,6 +21,16 @@ class ProxyChecker:
         return (isinstance(self.validity, str)
                 and self.validity != ""
                 and self.validity.startswith("http"))
+
+    def harvest_proxy_list(self, source=None):
+        if isinstance(source, list):
+            for src in source:
+                self.harvest_proxy_list(src)
+            return
+
+        if issubclass(source, SourceInterface):
+            self.proxy_list.extend(source.get_proxies())
+            return
 
     def build_proxy_dict(self, raw_proxy):
         proxy_dict = {}
