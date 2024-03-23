@@ -15,6 +15,6 @@ class SslProxiesSource(SourceInterface):
                 columns = row.find_all('td')
                 ip = columns[0].text
                 port = columns[1].text
-                secure = 'True' if columns[6].text == 'yes' else 'False'
+                secure = 'False'
                 self.proxies.append(f'http|{secure}|{ip}:{port}')
         return self.proxies
