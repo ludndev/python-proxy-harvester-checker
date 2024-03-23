@@ -1,9 +1,9 @@
 import os
 import random
 import requests
+import util
 from pathlib import Path
 from sources.interface_source import SourceInterface
-from util import build_proxy_dict
 
 
 class ProxyChecker:
