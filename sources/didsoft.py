@@ -25,6 +25,7 @@ class DidSoftSource(SourceInterface):
             url (str): The URL to fetch proxies from. If not provided, it will be constructed using the email and password.
         """
         super().__init__()
+        self.auth = True
         self.url = url
         self.email = email
         self.password = password
