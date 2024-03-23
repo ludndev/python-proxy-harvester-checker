@@ -16,8 +16,9 @@ def build_proxy_dict(raw_proxy):
     raw_dict = raw_proxy.split('|')
 
     if raw_dict[0] != 'socks4' and raw_dict[0] != 'socks5':
-        proxy_dict['http'] = f'https://{raw_dict[2]}'
+        proxy_dict['http'] = f'http://{raw_dict[2]}'
         if raw_dict[1] == 'True':
+            proxy_dict['http'] = f'https://{raw_dict[2]}'
             proxy_dict['https'] = f'https://{raw_dict[2]}'
 
     if raw_dict[0] == 'socks4':
