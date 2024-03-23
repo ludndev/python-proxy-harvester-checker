@@ -2,7 +2,8 @@ class SourceInterface:
     """Interface for defining proxy sources."""
 
     def __init__(self):
-        """Initialize the proxy list."""
+        """Initialize a new source interface instance."""
+        self.auth = False
         self.proxies = []
 
     def get_data(self) -> list:
