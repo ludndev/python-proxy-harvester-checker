@@ -28,7 +28,7 @@ class ProxyChecker:
                 self.harvest_proxy_list(src)
             return
 
-        if issubclass(source, SourceInterface):
+        if isinstance(source, SourceInterface):
             self.proxy_list.extend(source.get_proxies())
             return
 
