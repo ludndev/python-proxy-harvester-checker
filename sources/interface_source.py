@@ -9,6 +9,5 @@ class SourceInterface:
         pass
 
     def get_proxies(self) -> list:
-        for raw_proxy in self.get_data():
-            self.proxies.append(util.build_proxy_dict(raw_proxy))
+        self.get_data()
         return self.proxies
