@@ -1,5 +1,4 @@
 import requests
-import util
 from sources.interface_source import SourceInterface
 
 
@@ -18,8 +17,3 @@ class ProxyScrapeSource(SourceInterface):
         else:
             print("Failed to retrieve content from list.didsoft.com. Status code:", response.status_code)
         return proxies
-
-    def get_proxies(self) -> list:
-        for raw_proxy in self.get_data():
-            self.proxies.append(util.build_proxy_dict(raw_proxy))
-        return self.proxies

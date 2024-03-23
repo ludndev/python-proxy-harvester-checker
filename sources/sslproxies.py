@@ -19,8 +19,3 @@ class SslProxiesSource(SourceInterface):
                 secure = 'True' if columns[6].text == 'yes' else 'False'
                 proxies.append(f'http|{secure}|{ip}:{port}')
         return proxies
-
-    def get_proxies(self) -> list:
-        for raw_proxy in self.get_data():
-            self.proxies.append(util.build_proxy_dict(raw_proxy))
-        return self.proxies

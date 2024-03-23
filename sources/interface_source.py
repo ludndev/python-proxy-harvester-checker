@@ -1,3 +1,6 @@
+import util
+
+
 class SourceInterface:
     def __init__(self):
         self.proxies = []
@@ -6,4 +9,6 @@ class SourceInterface:
         pass
 
     def get_proxies(self) -> list:
-        pass
+        for raw_proxy in self.get_data():
+            self.proxies.append(util.build_proxy_dict(raw_proxy))
+        return self.proxies
