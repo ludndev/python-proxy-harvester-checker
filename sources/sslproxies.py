@@ -1,7 +1,7 @@
 import requests
 import util
 from bs4 import BeautifulSoup
-from interface_source import SourceInterface
+from sources.interface_source import SourceInterface
 
 
 class SslProxiesSource(SourceInterface):
