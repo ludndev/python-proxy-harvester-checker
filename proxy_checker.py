@@ -14,6 +14,11 @@ class ProxyChecker:
         if not os.path.exists(self.file_name):
             Path(self.file_name).touch()
 
+    def check_validity(self):
+        return (isinstance(self.validity, str)
+                and self.validity != ""
+                and self.validity.startswith("http"))
+
     def build_proxy_dict(self, raw_proxy):
         proxy_dict = {}
 
