@@ -63,3 +63,12 @@ class ProxyChecker:
             proxy_list = [line.strip() for line in f]
             f.close()
             return proxy_list
+
+    def store_proxy_list(self):
+        with open(self.file_name, 'a+') as f:
+            lines = f.readlines()
+            for raw_proxy in self.proxy_list:
+                proxy_check = self.check_proxy(raw_proxy) if self.check_validity() else True
+                if raw_proxy not in lines and proxy_check:
+                    f.write(raw_proxy + '\n')
+            f.close()
