@@ -1,4 +1,5 @@
 import os
+import random
 import requests
 from pathlib import Path
 
@@ -72,3 +73,14 @@ class ProxyChecker:
                 if raw_proxy not in lines and proxy_check:
                     f.write(raw_proxy + '\n')
             f.close()
+
+    def get_random_proxy(self):
+        with open(self.file_name, 'r+') as f:
+            proxy_list = [line.strip() for line in f]
+            if len(proxy_list) == 0:
+                return None
+            random.shuffle(proxy_list)
+            for raw_proxy in proxy_list:
+                return self.build_proxy_dict(raw_proxy)
+            f.close()
+        return None
