@@ -1,4 +1,5 @@
 import requests
+import util
 from sources.interface_source import SourceInterface
 
 
@@ -20,5 +21,5 @@ class ProxyScrapeSource(SourceInterface):
 
     def get_proxies(self) -> list:
         for raw_proxy in self.get_data():
-            self.proxies.append(self.build_proxy_dict(raw_proxy))
+            self.proxies.append(util.build_proxy_dict(raw_proxy))
         return self.proxies

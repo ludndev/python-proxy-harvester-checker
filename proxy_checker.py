@@ -3,6 +3,7 @@ import random
 import requests
 from pathlib import Path
 from sources.interface_source import SourceInterface
+from util import build_proxy_dict
 
 
 class ProxyChecker:
@@ -32,35 +33,13 @@ class ProxyChecker:
             self.proxy_list.extend(source.get_proxies())
             return
 
-    def build_proxy_dict(self, raw_proxy):
-        proxy_dict = {}
-
-        raw_dict = raw_proxy.split('|')
-
-        if raw_dict[0] != 'socks4' and raw_dict[0] != 'socks5':
-            proxy_dict['http'] = f'https://{raw_dict[2]}'
-            if raw_dict[1] == 'True':
-                proxy_dict['https'] = f'https://{raw_dict[2]}'
-
-        if raw_dict[0] == 'socks4':
-            proxy_dict['http'] = f'socks4://{raw_dict[2]}'
-            if raw_dict[1] == 'True':
-                proxy_dict['https'] = f'socks4://{raw_dict[2]}'
-
-        if raw_dict[0] == 'socks5':
-            proxy_dict['http'] = f'socks5://{raw_dict[2]}'
-            if raw_dict[1] == 'True':
-                proxy_dict['https'] = f'socks5://{raw_dict[2]}'
-
-        return proxy_dict
-
     def check_proxy(self, raw_proxy, user_agent=None):
         if not isinstance(user_agent, str) or user_agent == "":
             user_agent = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                           "AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/58.0.3029.110 Safari/537.3")
         headers = {"User-Agent": user_agent}
-        proxies = self.build_proxy_dict(raw_proxy)
+        proxies = util.build_proxy_dict(raw_proxy)
         try:
             response = requests.get(self.validity, headers=headers, proxies=proxies, timeout=5)
             if response.status_code == 200:
@@ -92,7 +71,7 @@ class ProxyChecker:
                 return None
             random.shuffle(proxy_list)
             for raw_proxy in proxy_list:
-                return self.build_proxy_dict(raw_proxy)
+                return util.build_proxy_dict(raw_proxy)
             f.close()
         return None
 
