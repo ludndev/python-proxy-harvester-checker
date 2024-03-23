@@ -4,6 +4,7 @@ import requests
 import util
 from pathlib import Path
 from sources.interface_source import SourceInterface
+from sources import get_sources
 
 
 class ProxyChecker:
@@ -54,6 +55,18 @@ class ProxyChecker:
         return (isinstance(self.validity, str)
                 and self.validity != ""
                 and self.validity.startswith("http"))
+
+    def default_sources(self):
+        """Retrieve default sources without authentication.
+
+        Returns:
+            list: List of source instances without authentication.
+        """
+        sources = []
+        for source_class in get_sources():
+            if not source_class().auth:
+                sources.append(source_class())
+        return sources
 
     def harvest_proxy_list(self, source=None):
         """
