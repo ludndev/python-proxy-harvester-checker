@@ -13,10 +13,12 @@ def get_sources(auth=None):
     classes = []
     for source_class in source_classes:
         source_instance = source_class()
-        if isinstance(auth, bool) and source_instance.auth == auth:
+        if isinstance(auth, bool):
+            if source_instance.auth is auth:
+                classes.append(source_class)
+                pass
+        else:
             classes.append(source_class)
-            continue
-        classes.append(source_class)
     return classes
 
 
