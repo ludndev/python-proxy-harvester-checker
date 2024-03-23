@@ -1,6 +1,3 @@
-import util
-
-
 class SourceInterface:
     def __init__(self):
         self.proxies = []
