@@ -7,7 +7,30 @@ from sources.interface_source import SourceInterface
 
 
 class ProxyChecker:
+    """
+    A class for harvesting, checking, and managing proxies.
+
+    This class provides functionality to harvest proxies from various sources,
+    check their validity, store valid proxies, and retrieve a random proxy.
+
+    Attributes:
+        source (list or SourceInterface, optional): The source(s) from which to harvest proxies.
+            Can be a single SourceInterface instance or a list of instances.
+        file_name (str, optional): The name of the file to store the valid proxies. Defaults to "data/proxy_list.txt".
+        validity (str, optional): The URL to check the validity of proxies. Defaults to "https://google.com/".
+    """
+
     def __init__(self, source=None, file_name="data/proxy_list.txt", validity="https://google.com/"):
+        """
+        Initialize the ProxyChecker instance.
+
+        Args:
+            source (list or SourceInterface, optional): The source(s) from which to harvest proxies.
+                Can be a single SourceInterface instance or a list of instances.
+            file_name (str, optional): The name of the file to store the valid proxies.
+                Defaults to "data/proxy_list.txt".
+            validity (str, optional): The URL to check the validity of proxies. Defaults to "https://google.com/".
+        """
         self.proxy_list = []
         self.source = source
         self.file_name = file_name
@@ -15,15 +38,31 @@ class ProxyChecker:
         self.create_proxy_stored_file_name_if_not_exist()
 
     def create_proxy_stored_file_name_if_not_exist(self):
+        """
+        Create the proxy storage file if it does not exist.
+        """
         if not os.path.exists(self.file_name):
             Path(self.file_name).touch()
 
     def check_validity(self):
+        """
+        Check if the validity URL is valid.
+
+        Returns:
+            bool: True if the validity URL is valid, False otherwise.
+        """
         return (isinstance(self.validity, str)
                 and self.validity != ""
                 and self.validity.startswith("http"))
 
     def harvest_proxy_list(self, source=None):
+        """
+        Harvest proxies from the specified source(s).
+
+        Args:
+            source (list or SourceInterface, optional): The source(s) from which to harvest proxies.
+                Can be a single SourceInterface instance or a list of instances.
+        """
         if isinstance(source, list):
             for src in source:
                 self.harvest_proxy_list(src)
@@ -34,6 +73,16 @@ class ProxyChecker:
             return
 
     def check_proxy(self, raw_proxy, user_agent=None):
+        """
+        Check the validity of a proxy.
+
+        Args:
+            raw_proxy (str): The raw proxy string.
+            user_agent (str, optional): The user agent string. Defaults to a common user agent string.
+
+        Returns:
+            bool: True if the proxy is valid, False otherwise.
+        """
         if not isinstance(user_agent, str) or user_agent == "":
             user_agent = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                           "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -50,12 +99,21 @@ class ProxyChecker:
         return False
 
     def get_proxy_list(self):
+        """
+        Get the list of valid proxies from the storage file.
+
+        Returns:
+            list: A list of valid proxies.
+        """
         with open(self.file_name, 'r+') as f:
             proxy_list = [line.strip() for line in f]
             f.close()
             return proxy_list
 
     def store_proxy_list(self):
+        """
+        Store valid proxies in the storage file.
+        """
         with open(self.file_name, 'a+') as f:
             lines = f.readlines()
             for raw_proxy in self.proxy_list:
@@ -65,6 +123,12 @@ class ProxyChecker:
             f.close()
 
     def get_random_proxy(self):
+        """
+        Get a random valid proxy from the storage file.
+
+        Returns:
+            dict: A dictionary containing the proxy details (protocol, IP, port).
+        """
         with open(self.file_name, 'r+') as f:
             proxy_list = [line.strip() for line in f]
             if len(proxy_list) == 0:
@@ -76,5 +140,8 @@ class ProxyChecker:
         return None
 
     def do_the_thing(self):
+        """
+        Perform the main operation: harvest, store, and check proxies.
+        """
         self.harvest_proxy_list(self.source)
         self.store_proxy_list()

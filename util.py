@@ -1,4 +1,16 @@
 def build_proxy_dict(raw_proxy):
+    """
+    Build a dictionary representation of a raw proxy string.
+
+    This function parses a raw proxy string and constructs a dictionary representation
+    containing the proxy details suitable for use with the `requests` library.
+
+    Args:
+        raw_proxy (str): The raw proxy string in the format 'protocol|secure|ip:port'.
+
+    Returns:
+        dict: A dictionary containing the proxy details.
+    """
     proxy_dict = {}
 
     raw_dict = raw_proxy.split('|')
