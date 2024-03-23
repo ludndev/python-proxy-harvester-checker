@@ -2,7 +2,7 @@ import requests
 from sources.interface_source import SourceInterface
 
 
-class ProxyScrapeSource(SourceInterface):
+class DidSoftSource(SourceInterface):
     def get_data(self, email=None, password=None, url=None) -> list:
         if url is None or url == "":
             if email is None or password is None:
