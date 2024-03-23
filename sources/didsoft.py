@@ -10,10 +10,9 @@ class DidSoftSource(SourceInterface):
             url = ("http://list.didsoft.com/get"
                    f"?email={email}.com&pass={password}&pid=http1000&showcountry=no")
         response = requests.get(url)
-        proxies = []
         if response.status_code == 200:
             for line in response.content.splitlines():
-                proxies.append(f"http|false|{line.strip()}")
+                self.proxies.append(f"http|false|{line.strip()}")
         else:
             print("Failed to retrieve content from list.didsoft.com. Status code:", response.status_code)
-        return proxies
+        return self.proxies

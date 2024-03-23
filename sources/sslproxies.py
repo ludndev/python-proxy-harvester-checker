@@ -6,7 +6,6 @@ from interface_source import SourceInterface
 
 class SslProxiesSource(SourceInterface):
     def get_data(self):
-        proxies = []
         response = requests.get("https://www.sslproxies.org/")
         soup = BeautifulSoup(response.content, 'html.parser')
         table = soup.select_one('table', class_='.table .table-striped .table-bordered')
@@ -17,5 +16,5 @@ class SslProxiesSource(SourceInterface):
                 ip = columns[0].text
                 port = columns[1].text
                 secure = 'True' if columns[6].text == 'yes' else 'False'
-                proxies.append(f'http|{secure}|{ip}:{port}')
-        return proxies
+                self.proxies.append(f'http|{secure}|{ip}:{port}')
+        return self.proxies

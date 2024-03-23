@@ -7,13 +7,13 @@ class ProxyScrapeSource(SourceInterface):
         url = ("https://api.proxyscrape.com/v3/free-proxy-list/get"
                "?request=displayproxies&protocol=http&proxy_format=ipport&format=json")
         response = requests.get(url)
-        proxies = []
+        self.proxies = []
         if response.status_code == 200:
             data = response.json()
             if 'proxies' in data and len(data['proxies']) > 0:
                 for proxy in data['proxies']:
                     secure = 'True' if proxy['ssl'] else 'False'
-                    proxies.append(f"{proxy['protocol']}|{secure}|{proxy['ip']}:{proxy['port']}")
+                    self.proxies.append(f"{proxy['protocol']}|{secure}|{proxy['ip']}:{proxy['port']}")
         else:
             print("Failed to retrieve content from api.proxyscrape.com. Status code:", response.status_code)
-        return proxies
+        return self.proxies
