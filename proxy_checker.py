@@ -95,3 +95,7 @@ class ProxyChecker:
                 return self.build_proxy_dict(raw_proxy)
             f.close()
         return None
+
+    def do_the_thing(self):
+        self.harvest_proxy_list(self.source)
+        self.store_proxy_list()
