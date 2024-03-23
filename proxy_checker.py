@@ -76,6 +76,11 @@ class ProxyChecker:
             source (list or SourceInterface, optional): The source(s) from which to harvest proxies.
                 Can be a single SourceInterface instance or a list of instances.
         """
+        if source is None:
+            self.source = self.default_sources()
+            self.harvest_proxy_list(self.source)
+            return
+
         if isinstance(source, list):
             for src in source:
                 self.harvest_proxy_list(src)
