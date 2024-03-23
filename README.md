@@ -41,6 +41,10 @@ This Python project provides a simple yet powerful solution for harvesting and c
 - `sources/`: Directory containing implementations of proxy sources, each implementing the `SourceInterface`.
 - `data/`: Directory where valid proxies are stored. (Note: `proxy_list.txt` is ignored by default in `.gitignore`)
 
+## Documentations & Examples
+
+[DOCS](DOCS.md).
+
 ## Contributing
 
 Contributions to this project are welcome! If you have any ideas for new features, bug fixes, or improvements, please feel free to open an issue or submit a pull request.
