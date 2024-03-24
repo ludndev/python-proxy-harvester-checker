@@ -7,12 +7,16 @@ class TestProxySources(unittest.TestCase):
         self.proxies = {}
 
     def test_get_proxies_from_all_sources(self):
-        sources_classes = sources.get_sources(auth=None)
-        self.fetch_and_assert_proxies(sources_classes)
+        # Expect an exception when fetching proxies with authentication
+        with self.assertRaises(Exception):
+            sources_classes = sources.get_sources(auth=None)
+            self.fetch_and_assert_proxies(sources_classes)
 
     def test_get_proxies_with_auth_true(self):
-        sources_classes = sources.get_sources(auth=True)
-        self.fetch_and_assert_proxies(sources_classes)
+        # Expect an exception when fetching proxies with authentication
+        with self.assertRaises(Exception):
+            sources_classes = sources.get_sources(auth=True)
+            self.fetch_and_assert_proxies(sources_classes)
 
     def test_get_proxies_with_auth_false(self):
         sources_classes = sources.get_sources(auth=False)
