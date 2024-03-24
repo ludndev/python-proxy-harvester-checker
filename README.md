@@ -1,9 +1,12 @@
 # Python Proxy Harvester and Checker
 
-![Python version](https://img.shields.io/badge/python-3.7%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-[![Test & Lint](https://github.com/ludndev/python-proxy-harvester-checker/actions/workflows/test-lint.yml/badge.svg)](https://github.com/ludndev/python-proxy-harvester-checker/actions/workflows/test-lint.yml)
+<div align="center" style="text-align: center">
 
+   ![Python version](https://img.shields.io/badge/python-3.7%2B-blue)
+   ![License](https://img.shields.io/badge/license-MIT-green)
+   [![Test & Lint](https://github.com/ludndev/python-proxy-harvester-checker/actions/workflows/test-lint.yml/badge.svg)](https://github.com/ludndev/python-proxy-harvester-checker/actions/workflows/test-lint.yml)
+
+</div>
 
 This Python project provides a simple yet powerful solution for harvesting and checking proxy servers from various sources. It includes functionality to fetch proxies from different online sources, check their validity, and store valid proxies for later use.
 
